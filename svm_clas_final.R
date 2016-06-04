@@ -1,7 +1,8 @@
 library('RTextTools')
 library('twitteR')
 
-#Preparing data
+#Preparing data. "tweet" column contains texts of tweets, 
+#"tourist" column is for labels (TRUE = tourist, FALSE = resident
 svmtweets <- tweets_as_frame[,c("tweet", "tourist")]
 
 #svmtweets$tweet <- as.character(svmtweets$tweet)    
@@ -11,11 +12,8 @@ levels(svmtweets$tourist)
 #[1] "FALSE" "TRUE" 
 
 length(svmtweets$tourist)
-#[1] 73663
 
 table(svmtweets$tourist)
-#FALSE  TRUE 
-#13639 60024 
 
 #Cleaning data. Here I dont remove numbers and punctuation, 
 #I will do it later while creating the matrix dtm (to use cleaning function 
@@ -80,8 +78,8 @@ cat('Error rate = ',100*(1-sum(diag(pt))/sum(pt)),'%')
 #Error rate =  20.68638 %
 summary(svm.result)
 #SVM_LABEL        SVM_PROB     
-#FALSE: 1261   Min.   :0.5000  
-#TRUE :35570   1st Qu.:0.8201  
+#FALSE:        Min.   :0.5000  
+#TRUE :        1st Qu.:0.8201  
                #Median :0.8655  
                #Mean   :0.8444  
                #3rd Qu.:0.8977  
